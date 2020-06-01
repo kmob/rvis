@@ -1,0 +1,12 @@
+{
+  "name": "rvis",
+  "version": "1.0.0",
+  "description": "Test using react-vis with shadow-cljs",
+  "main": "index.js",
+  "scripts": {},
+  "author": "Kevin OBrien",
+  "license": "ISC",
+  "devDependencies": {
+    "shadow-cljs": "^2.9.10"
+  }
+}
