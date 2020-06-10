@@ -76,9 +76,6 @@
     [:div (pr-str @chart-options)]
     [:div (build-chart @chart-options)]]])
 
-
-    ; [:div (build_chart pie_chart)]]])
-
 ;; MOUNT AND MAIN FUNCTIONS
 (defn mount! []
   (reagent-dom/render [app]
