@@ -26,7 +26,8 @@
 ;; echarts documentation
 ;; https://echarts.apache.org/en/api.html#echarts.init
 ;; https://echarts.apache.org/en/api.html#echartsInstance.setOption
-;; simple echarts example
+;; simple echarts examples
+;; https://github.com/a0x/echarts_samples
 ;; https://stackoverflow.com/questions/27930030/echarts-from-baidu
 ;; the dom object to hold the options
 (defonce chart-options (reagent/atom ""))
