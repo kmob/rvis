@@ -33,7 +33,7 @@
 ;; load the echarts/init.
 (defonce init-echarts (echarts/init.))
 ;; a function to run .setOption on the chart options passed in
-(defn build_chart [options]
+(defn build-chart [options]
   (.setOption init-echarts (clj->js(options))))
 
 ; chart options examples that should work
@@ -58,18 +58,26 @@
                  :yAxis {:type "value"}
                  :series [{:type "line"
                            :data [820, 932, 901, 934, 1290, 1330, 1320]}]})
+
+(reset! chart-options pie_chart)
+
 (defn app []
   [:div
    [:h1 "Hello!"]
    [:div
     [:h2 "Markdown to HTML Converter"]
+    [:div (pr-str @markdown)]
     [:textarea
       {:on-change #(reset! markdown (-> % .-target .-value))
         :value @markdown}]
     [:div (md->html @markdown)]]
    [:div
     [:h2 "Graph"]
-    [:div (build_chart pie_chart)]]])
+    [:div (pr-str @chart-options)]
+    [:div (build-chart @chart-options)]]])
+
+
+    ; [:div (build_chart pie_chart)]]])
 
 ;; MOUNT AND MAIN FUNCTIONS
 (defn mount! []
