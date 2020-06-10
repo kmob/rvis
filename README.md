@@ -1,4 +1,4 @@
-# Using node and shadow-cljs to build clojurescript website
+# Using node and shadow-cljs to build echarts graphs
 
 npm init
 
