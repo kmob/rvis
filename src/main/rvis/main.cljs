@@ -32,10 +32,10 @@
 ;; the dom object to hold the options
 (defonce chart-options (reagent/atom ""))
 ;; load the echarts/init.
-; (defonce init-echarts (echarts/init.))
+(defonce init-echarts (echarts/init.))
 ;; a function to run .setOption on the chart options passed in
 ; (defn build-chart [options]
-;   (.setOption init-echarts (clj->js(options))))
+;   (.setOption init-echarts (clj->js options)))
 
 ; chart options examples that should work
 (def pie_chart
