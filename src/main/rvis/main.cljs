@@ -2,6 +2,7 @@
   (:require [reagent.core :as reagent]
        [reagent.dom :as reagent-dom]
        ["showdown" :as showdown]
+       ["codemirror" :as codemirror]
        ["echarts" :as echarts]))
 
 ;; SHOWDOWN
@@ -28,13 +29,22 @@
 ;; https://echarts.apache.org/en/api.html#echartsInstance.setOption
 ;; simple echarts example
 ;; https://echarts.apache.org/en/tutorial.html#Get%20Started%20with%20ECharts%20in%205%20minutes
-;; the dom object to hold the options
+;; the atom to hold the options
 (defonce chart-options (reagent/atom ""))
-;; load the echarts/init.
-(defonce init-echarts (echarts/init.))
-;; a function to run .setOption on the chart options passed in
-; (defn build-chart [options]
-;   (.setOption init-echarts (clj->js options)))
+;; create the chart component and lifecycle methods
+;; including a function to .init the component
+;; and to run .setOption to load the chart options passed as props
+(defn echart-inner []
+  (reagent/create-class {:display-name "echart-component"
+                         :component-did-mount (fn [comp]
+                                                (let [chart (echarts/init (reagent-dom/dom-node comp))
+                                                      options (clj->js (reagent/props comp))]
+                                                  (.setOption chart options)))
+                         :reagent-render (fn [comp] [:div  {:style {:width "600px" :height "300px"}}])}))
+;; Note: @config is a map so it gets passed as props and used with reagent/props in echart-inner.
+;; Non-props values can be accessed via (reagent/argv comp)
+(defn echart-outer [config]
+  [echart-inner @config])
 
 ; chart options examples that should work
 (def pie_chart
@@ -65,16 +75,15 @@
   [:div
    [:h1 "Hello!"]
    [:div
+    [:h2 "Build echarts"]
+    [:div [echart-outer chart-options]]]
+   [:div
     [:h2 "Markdown to HTML Converter"]
     [:div (pr-str @markdown)]
     [:textarea
       {:on-change #(reset! markdown (-> % .-target .-value))
         :value @markdown}]
-    [:div (md->html @markdown)]]
-   [:div
-    [:h2 "Graph"]
-    [:div (pr-str @chart-options)]]])
-    ; [:div (build-chart @chart-options)]]])
+    [:div (md->html @markdown)]]])
 
 ;; MOUNT AND MAIN FUNCTIONS
 (defn mount! []

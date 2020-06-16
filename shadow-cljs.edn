@@ -5,13 +5,13 @@
   "src/test"]
 
  :dependencies
- [[reagent "1.0.0-alpha2"]]
+ [[reagent "0.9.1"]]
 
  :dev-http {9000 "public/"}
 
  :builds
  {:app {:output-dir "public/compiledjs/"
-	:asset-path "compiledjs"
-	:target :browser
-	:modules {:main {:init-fn rvis.main/main!}}
-	:devtools {:after-load rvis.main/reload!}}}}
+        :asset-path "compliledjs"
+        :target :browser
+        :modules {:main {:init-fn rvis.main/main!}}
+        :devtools {:after-load rvis.main/reload!}}}}
